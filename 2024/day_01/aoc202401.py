@@ -1,5 +1,3 @@
-import pathlib
-import sys
 from aocd.models import Puzzle
 
 
@@ -22,10 +20,9 @@ def solve(puzzle_input):
     return solution_one, solution_two
 
 if __name__ == "__main__":
-    for path in sys.argv[1:]:
-        puzzle = Puzzle(year=2024, day=1)
-        puzzle_input = puzzle.input_data
-        with open(path, 'w') as input_file:
-            input_file.write(puzzle_input)
-        solutions = solve(puzzle_input)
-        print(f"Part One: {solutions[0]}\nPart Two: {solutions[1]}")
+    puzzle = Puzzle(year=2024, day=1)
+    puzzle_input = puzzle.input_data
+    with open('input.txt', 'w') as input_file:
+        input_file.write(puzzle_input)
+    solutions = solve(puzzle_input)
+    print(f"Part One: {solutions[0]}\nPart Two: {solutions[1]}")
