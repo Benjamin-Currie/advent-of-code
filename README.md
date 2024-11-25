@@ -13,7 +13,7 @@
 1. When each new puzzle is available you should navigate to the correct directory:
 
 ```
-$ cd 2024/day_01
+cd 2024/day_01
 ```
 
 and then run:
@@ -22,7 +22,17 @@ and then run:
 python aoc202401.py
 ```
 
-Replacing `2024/day_01` and `aoc202401.py` with the correct date i.e. on the 5th day you would do `cd 2024/day_05` and run `aoc202405.py`
+Replacing `2024/day_01` and `aoc202401.py` with the correct date i.e. on the 5th day you would do:
+
+```
+cd 2024/day_05
+```
+
+and then run:
+
+```
+python aoc202405.py
+```
 
 This will fetch the puzzle input for that day and create a new file named `input.txt` in the current directory.
 
