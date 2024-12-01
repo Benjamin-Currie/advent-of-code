@@ -3,15 +3,30 @@ from aocd.models import Puzzle
 
 def parse(puzzle_input):
     """Parse input."""
-    return puzzle_input.split()
+    list_of_ints = puzzle_input.split()
+    left_list = []
+    right_list = []
+    for i in range(0, len(list_of_ints), 2):
+        left_list.append(int(list_of_ints[i]))
+        right_list.append(int(list_of_ints[i + 1]))
+    return sorted(left_list), sorted(right_list)
 
 
 def part_one(data):
     """Solve part 1."""
+    total = 0
+    for i in range(0, len(data[0])):
+        sorted_data = sorted([data[0][i], data[1][i]])
+        total += sorted_data[1] - sorted_data[0]
+    return total
 
 
 def part_two(data):
     """Solve part 2."""
+    similarity_score = 0
+    for i in range(0, len(data[0])):
+        similarity_score += data[0][i] * data[1].count(data[0][i])
+    return similarity_score
 
 
 def solve(puzzle_input):
