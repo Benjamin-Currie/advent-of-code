@@ -3,7 +3,7 @@ from aocd.models import Puzzle
 
 def parse(puzzle_input):
     """Parse input."""
-    return [i.split() for i in puzzle_input.split("\n")]
+    return [[int(x) for x in i.split()] for i in puzzle_input.split("\n")]
 
 
 def part_one(data):
@@ -32,31 +32,25 @@ def part_two(data):
 
 
 def validation_check(line):
-    validation_passes = True
     increasing = False
     decreasing = False
-    # Check that the increase or decrease is within the acceptable range otherwise go to the next iteration
-    if int(line[-1]) > (int(line[0]) + (len(line) - 1) * 3) or int(line[-1]) < (
-        int(line[0]) - (len(line) - 1) * 3
+    # Check that the increase or decrease is within the acceptable range otherwise return False
+    if line[-1] > (line[0] + (len(line) - 1) * 3) or line[-1] < (
+        line[0] - (len(line) - 1) * 3
     ):
         return False
-    if int(line[0]) > int(line[-1]):
+    if line[0] > line[-1]:
         decreasing = True
-    elif int(line[0]) < int(line[-1]):
+    elif line[0] < line[-1]:
         increasing = True
     else:
         return False
     for index, number in enumerate(line):
         if index == len(line) - 1:
-            if validation_passes == True:
-                return True
-        if increasing and int(line[index + 1]) not in [
-            int(number) + x for x in range(1, 4)
-        ]:
+            return True
+        if increasing and line[index + 1] not in [number + x for x in range(1, 4)]:
             return False
-        if decreasing and int(line[index + 1]) not in [
-            int(number) - x for x in range(1, 4)
-        ]:
+        if decreasing and line[index + 1] not in [number - x for x in range(1, 4)]:
             return False
     return True
 
