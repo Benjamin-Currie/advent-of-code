@@ -24,6 +24,7 @@ def parse(puzzle_input, part_one=False):
 
     return numbers
 
+
 def part_one(data):
     """Solve part 1."""
     return sum(int(number_set[0]) * int(number_set[1]) for number_set in data)
