@@ -46,7 +46,7 @@ def check_patterns(data, row_index, column_index, matching_words=["XMAS", "SAMX"
     patterns_to_check = (
         ALL_PATTERNS if matching_words == ["XMAS", "SAMX"] else CROSS_PATTERN
     )
-    for name, pattern in patterns_to_check.items():
+    for pattern in patterns_to_check.values():
         letters = []
         for i, _ in enumerate(pattern["row"]):
             # Wrap in a try except to not stress about IndexErrors at boundaries
