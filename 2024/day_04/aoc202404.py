@@ -21,7 +21,7 @@ def part_one(data):
     """Solve part 1."""
     total = 0
     for row_index, row in enumerate(data):
-        for column_index, column in enumerate(row):
+        for column_index, _ in enumerate(row):
             total += check_patterns(data, row_index, column_index)
     return total
 
