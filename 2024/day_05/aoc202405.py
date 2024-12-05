@@ -5,18 +5,18 @@ from aocd.models import Puzzle
 def parse(puzzle_input):
     """Parse input into ordering rules and page numbers."""
     sections = puzzle_input.split("\n\n")
-    ordering_rules = defaultdict(list)
+    rules = defaultdict(list)
     page_numbers = []
 
     for section in sections:
         if "|" in section:
             for line in section.split("\n"):
                 key, value = line.split("|")
-                ordering_rules[key].append(value)
+                rules[key].append(value)
         else:
             page_numbers.append([row.split(",") for row in section.split("\n")])
 
-    return ordering_rules, page_numbers[0]
+    return rules, page_numbers[0]
 
 
 def part_one(data):
@@ -52,7 +52,7 @@ def all_rules_pass(page, rules):
     return all_rules_passed
 
 
-def correct_ordering(page, ordering_rules_dict):
+def correct_ordering(page, rules):
     """Swap the values over based on the rules until no more swaps are needed"""
     new_page = []
     correct_order = False
@@ -61,7 +61,7 @@ def correct_ordering(page, ordering_rules_dict):
         for number_index, number in enumerate(page):
             if number_index == len(page) - 1:
                 continue
-            if number in ordering_rules_dict[page[number_index + 1]]:
+            if number in rules[page[number_index + 1]]:
                 # swap the current number with the next one
                 page[number_index + 1], page[number_index] = (
                     page[number_index],
