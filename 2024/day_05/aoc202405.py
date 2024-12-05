@@ -47,7 +47,7 @@ def all_rules_pass(page, rules):
     for index, page_number in enumerate(page):
         valid_pages_to_be_ahead = rules[page_number]
         if all_rules_passed:
-            if not all(str(x) in valid_pages_to_be_ahead for x in page[index + 1 :]):
+            if not all(x in valid_pages_to_be_ahead for x in page[index + 1 :]):
                 all_rules_passed = False
     return all_rules_passed
 

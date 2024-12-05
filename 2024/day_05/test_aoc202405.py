@@ -19,6 +19,7 @@ def example_two():
 
 def test_parse_example_one(example_one):
     """Test that input is parsed properly."""
+    assert example_one[0]["75"] == ["29", "53", "47", "61", "13"]
     assert example_one[1] == [
         ["75", "47", "61", "53", "29"],
         ["97", "61", "53", "29", "13"],
