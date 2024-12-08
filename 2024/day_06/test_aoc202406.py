@@ -17,22 +17,30 @@ def example_two():
     return aoc.parse(puzzle_input)
 
 
-@pytest.mark.skip(reason="Not implemented")
 def test_parse_example_one(example_one):
     """Test that input is parsed properly."""
-    assert example_one == ...
+    assert example_one == [
+        [".", ".", ".", ".", "#", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
+        [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", "#", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "#", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+        [".", "#", ".", ".", "^", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", ".", "#", "."],
+        ["#", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", "#", ".", ".", "."],
+    ]
 
 
-@pytest.mark.skip(reason="Not implemented")
 def test_part_one_example_one(example_one):
     """Test part 1 on example input."""
-    assert aoc.part_one(example_one) == ...
+    assert aoc.part_one(example_one) == 41
 
 
-@pytest.mark.skip(reason="Not implemented")
 def test_part_two_example_one(example_one):
     """Test part 2 on first example input."""
-    assert aoc.part_two(example_one) == ...
+    assert aoc.part_two(example_one) == 6
 
 
 @pytest.mark.skip(reason="Not implemented")

@@ -3,11 +3,25 @@ from aocd.models import Puzzle
 
 def parse(puzzle_input):
     """Parse input."""
-    return puzzle_input.split()
+    dict_of_nums = {}
+    for line in puzzle_input.split("\n"):
+        split_line = line.strip().split(": ")
+        dict_of_nums[int(split_line[0])] = [int(i) for i in split_line[1].split(" ")]
+    return dict_of_nums
 
 
 def part_one(data):
     """Solve part 1."""
+    for key, value in data.items():
+        # Loop for enough times to test all possible values
+        combinations = []
+        for i in range((len(value) - 1) * 2):
+            total = 0
+            for ni, number in enumerate(value):
+
+
+
+
 
 
 def part_two(data):
