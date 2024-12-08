@@ -1,4 +1,5 @@
 from aocd.models import Puzzle
+from itertools import combinations_with_replacement
 
 
 def parse(puzzle_input):
@@ -12,16 +13,24 @@ def parse(puzzle_input):
 
 def part_one(data):
     """Solve part 1."""
+    total = 0
     for key, value in data.items():
-        # Loop for enough times to test all possible values
-        combinations = []
-        for i in range((len(value) - 1) * 2):
-            total = 0
-            for ni, number in enumerate(value):
+        no_of_parens = (len(value) -1)
+        for combo in {x for x in combinations_with_replacement([i for i in ["+", "*"]*no_of_parens], no_of_parens)}:
+            if key == eval(create_equation(value, no_of_parens, combo)):
+                total += key
+                break
+    return total
 
 
-
-
+def create_equation(value, no_of_parens, combo):
+    """Create the equation using parentheses to avoid the usual order of calculation"""
+    calculation = "(" * no_of_parens
+    calculation += f"{value[0]}{combo[0]}{value[1]}"
+    for i in range(2, no_of_parens+1):
+        calculation += f"){combo[i-1]}{value[i]}"
+    calculation += ")"
+    return calculation
 
 
 def part_two(data):
