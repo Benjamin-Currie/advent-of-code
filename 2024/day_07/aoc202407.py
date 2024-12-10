@@ -1,3 +1,7 @@
+"""
+This is truly awful, it will take hours and hours to run!
+"""
+
 from aocd.models import Puzzle
 from itertools import combinations_with_replacement
 
@@ -13,28 +17,77 @@ def parse(puzzle_input):
 
 def part_one(data):
     """Solve part 1."""
-    total = 0
+    total = CustomInt(0)
     for key, value in data.items():
-        no_of_parens = (len(value) -1)
-        for combo in {x for x in combinations_with_replacement([i for i in ["+", "*"]*no_of_parens], no_of_parens)}:
-            if key == eval(create_equation(value, no_of_parens, combo)):
-                total += key
-                break
+        total += check_equation(key, value, ["+", "*"])
     return total
+
+
+def part_two(data):
+    """Solve part 2."""
+    total = CustomInt(0)
+    for key, value in data.items():
+        print(value)
+        total += check_equation(key, value, ["+", "*", "-"])
+    return total
+
+
+class CustomInt(int):
+    """
+    Class which inherits from int but overloads the sub method to
+    concatentate two ints together.
+    """
+
+    def __init__(self, num):
+        self.num = num
+
+    def __mul__(self, other):
+        if type(other) == int:
+            other_num = other
+        else:
+            other_num = other.num
+        return CustomInt(self.num * other_num)
+
+    def __add__(self, other):
+        if type(other) == int:
+            other_num = other
+        else:
+            other_num = other.num
+        return CustomInt(self.num + other_num)
+
+    def __sub__(self, other):
+        if type(other) == int:
+            other_num = other
+        else:
+            other_num = other.num
+        return CustomInt(int(str(self.num) + str(other_num)))
 
 
 def create_equation(value, no_of_parens, combo):
     """Create the equation using parentheses to avoid the usual order of calculation"""
     calculation = "(" * no_of_parens
-    calculation += f"{value[0]}{combo[0]}{value[1]}"
-    for i in range(2, no_of_parens+1):
-        calculation += f"){combo[i-1]}{value[i]}"
+    calculation += f"CustomInt({value[0]}){combo[0]}CustomInt({value[1]})"
+    for i in range(2, no_of_parens + 1):
+        calculation += f"){combo[i-1]}CustomInt({value[i]})"
     calculation += ")"
     return calculation
 
 
-def part_two(data):
-    """Solve part 2."""
+def check_equation(desired_value, values_to_check, operators):
+    no_of_parens = len(values_to_check) - 1
+    if len(values_to_check) == 1:
+        if desired_value == values_to_check[0]:
+            return desired_value
+        return 0
+    for combo in {
+        x
+        for x in combinations_with_replacement(
+            [i for i in operators * no_of_parens], no_of_parens
+        )
+    }:
+        if desired_value == eval(create_equation(values_to_check, no_of_parens, combo)):
+            return desired_value
+    return 0
 
 
 def solve(puzzle_input):
