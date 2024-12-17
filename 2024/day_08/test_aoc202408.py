@@ -31,9 +31,9 @@ def test_part_one_example_one(example_one):
     assert aoc.part_one(example_one) == 14
 
 
-# def test_part_two_example_one(example_one):
-#     """Test part 2 on first example input."""
-#     assert aoc.part_two(example_one) == 34
+def test_part_two_example_one(example_one):
+    """Test part 2 on first example input."""
+    assert aoc.part_two(example_one) == 34
 
 
 def test_part_two_example_two(example_two):
