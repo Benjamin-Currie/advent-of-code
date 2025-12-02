@@ -19,12 +19,12 @@ def example_two():
 
 def test_parse_example_one(example_one):
     """Test that input is parsed properly."""
-    assert example_one == ...
+    assert example_one == [('L', 68), ('L', 30), ('R', 48), ('L', 5), ('R', 60), ('L', 55), ('L', 1), ('L', 99), ('R', 14), ('L', 82)]
 
 
 def test_part_one_example_one(example_one):
     """Test part 1 on example input."""
-    assert aoc.part_one(example_one) == ...
+    assert aoc.part_one(example_one) == 3
 
 
 def test_part_two_example_one(example_one):

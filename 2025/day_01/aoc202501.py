@@ -3,11 +3,22 @@ from aocd.models import Puzzle
 
 def parse(puzzle_input):
     """Parse input."""
+    return [(x[0], int(x[1:])) for x in puzzle_input.split("\n")]
 
 
 def part_one(data):
     """Solve part 1."""
-
+    safe_nums = [i for i in range(0, 100)]
+    current_index = 50
+    total = 0
+    for direction, clicks in data:
+        if direction == "R":
+            new_index = safe_nums[(current_index+clicks)%len(safe_nums)]
+        else:
+            new_index = safe_nums[(current_index-clicks)%len(safe_nums)]
+        total += 1 if new_index == 0 else 0
+        current_index = new_index
+    return total
 
 def part_two(data):
     """Solve part 2."""
