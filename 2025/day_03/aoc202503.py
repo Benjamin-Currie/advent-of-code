@@ -3,14 +3,47 @@ from aocd.models import Puzzle
 
 def parse(puzzle_input):
     """Parse input."""
+    return [[int(i) for i in line] for line in puzzle_input.split("\n")]
 
 
 def part_one(data):
     """Solve part 1."""
+    total = 0
+    for row in data:
+        l = max(row)
+        if row.index(l) == len(row) - 1:
+            r = l
+            l = max(row[:-1])
+        else:
+            r = max(row[row.index(l) + 1 :])
+        total += int(f"{l}{r}")
+    return total
 
 
 def part_two(data):
     """Solve part 2."""
+    total = 0
+    for row in data:
+        new_row = []
+        start_index = 0
+        end_index = -11
+        for i in range(12):
+            if i == 11:
+                highest_number = max(row[start_index:])
+            else:
+                highest_number = max(row[start_index:end_index])
+
+            # Trim the row to start after the latest highest number
+            row = row[start_index:]
+            new_row.append(highest_number)
+            start_index = row.index(highest_number) + 1
+
+            # Avoid setting end_index to 0 on the last iteration
+            if end_index != -1:
+                end_index += 1
+
+        total += int("".join(str(i) for i in new_row))
+    return total
 
 
 def solve(puzzle_input):
