@@ -40,7 +40,7 @@ def test_part_one_example_one(example_one):
 
 def test_part_two_example_one(example_one):
     """Test part 2 on first example input."""
-    assert aoc.part_two(example_one) == ...
+    assert aoc.part_two(example_one) == 43
 
 
 @pytest.mark.skip(reason="Not needed")
